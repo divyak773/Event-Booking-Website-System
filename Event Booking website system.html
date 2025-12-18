@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Booking Website</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+  }
+
+  header {
+    background: #4a90e2;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 24px;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  .card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .info {
+    padding: 15px;
+  }
+
+  button {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #357abd;
+  }
+
+  /* ===== POPUP FORM ===== */
+  .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+  }
+
+  .popup-content {
+    background: white;
+    width: 300px;
+    padding: 20px;
+    margin: 120px auto;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .popup-content input {
+    width: 90%;
+    padding: 8px;
+    margin: 8px 0;
+  }
+
+  #message {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+</style>
+</head>
+
+<body>
+
+<header>🎉 Event Booking Website</header>
+
+<div class="container">
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1515168833906-d2a3b82b302d">
+    <div class="info">
+      <h3>Live Music Concert</h3>
+      <p>Date: 20 Nov 2025</p>
+      <p>Location: Chennai</p>
+      <button onclick="openForm('Live Music Concert')">Book Now</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d">
+    <div class="info">
+      <h3>Tech Conference 2025</h3>
+      <p>Date: 10 Dec 2025</p>
+      <p>Location: Bengaluru</p>
+      <button onclick="openForm('Tech Conference 2025')">Book Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h3 id="eventName"></h3>
+    <input type="text" id="name" placeholder="Your Name">
+    <input type="email" id="email" placeholder="Your Email">
+    <br><br>
+    <button onclick="confirmBooking()">Confirm Booking</button>
+    <br><br>
+    <button onclick="closeForm()">Cancel</button>
+  </div>
+</div>
+
+<p id="message"></p>
+
+<script>
+  let selectedEvent = "";
+
+  function openForm(event) {
+    selectedEvent = event;
+    document.getElementById("eventName").innerText = event;
+    document.getElementById("popup").style.display = "block";
+  }
+
+  function closeForm() {
+    document.getElementById("popup").style.display = "none";
+  }
+
+  function confirmBooking() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+
+    if (name === "" || email === "") {
+      alert("Please fill all details");
+      return;
+    }
+
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("message").innerText =
+      "✅ " + name + ", your booking for " + selectedEvent + " is confirmed!";
+  }
+</script>
+
+</body>
+</html>
